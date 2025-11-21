@@ -1,0 +1,52 @@
+# The Talking Heads - Git Attributes
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Python files
+*.py text eol=lf diff=python
+
+# Configuration files
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+
+# Documentation
+*.md text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Batch files (Windows)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mp4 binary
+*.mp3 binary
+*.wav binary
+*.avi binary
+*.mov binary
+*.pdf binary
+
+# Archives
+*.zip binary
+*.tar.gz binary
+*.rar binary
+
+# Model files
+*.pth binary
+*.pt binary
+*.ckpt binary
+*.h5 binary
+*.pb binary
+*.onnx binary
+
