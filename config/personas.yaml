@@ -1,0 +1,92 @@
+# The Talking Heads - Persona Configurations
+# Define your podcast personas here
+
+personas:
+  alice:
+    name: "Alice"
+    description: "Main host, friendly and engaging"
+    voice:
+      engine: "elevenlabs"
+      voice_id: "voice_alice_123"  # Replace with actual voice ID
+      style: "conversational"
+      rate: 1.0
+      pitch: 1.0
+    avatar:
+      engine: "heygen"
+      avatar_id: "cartoon_female_01"  # Replace with actual avatar ID
+      style: "cartoon"
+      expressions:
+        enabled: true
+        default: "neutral"
+        categories:
+          - "happy"
+          - "neutral"
+          - "surprised"
+          - "concerned"
+      gestures:
+        enabled: true
+        frequency: "moderate"  # Options: "low", "moderate", "high"
+        library:
+          - "point"
+          - "wave"
+          - "emphasize"
+  
+  bob:
+    name: "Bob"
+    description: "Co-host, professional and knowledgeable"
+    voice:
+      engine: "elevenlabs"
+      voice_id: "voice_bob_456"  # Replace with actual voice ID
+      style: "professional"
+      rate: 1.0
+      pitch: 0.9  # Slightly deeper voice
+    avatar:
+      engine: "heygen"
+      avatar_id: "cartoon_male_01"  # Replace with actual avatar ID
+      style: "cartoon"
+      expressions:
+        enabled: true
+        default: "neutral"
+        categories:
+          - "happy"
+          - "neutral"
+          - "concerned"
+          - "thinking"
+      gestures:
+        enabled: true
+        frequency: "moderate"
+        library:
+          - "point"
+          - "emphasize"
+          - "thinking"
+  
+  charlie:
+    name: "Charlie"
+    description: "Guest, enthusiastic and expressive"
+    voice:
+      engine: "elevenlabs"
+      voice_id: "voice_charlie_789"  # Replace with actual voice ID
+      style: "energetic"
+      rate: 1.1  # Slightly faster
+      pitch: 1.0
+    avatar:
+      engine: "heygen"
+      avatar_id: "cartoon_neutral_01"  # Replace with actual avatar ID
+      style: "cartoon"
+      expressions:
+        enabled: true
+        default: "happy"  # More expressive default
+        categories:
+          - "happy"
+          - "excited"
+          - "surprised"
+          - "neutral"
+      gestures:
+        enabled: true
+        frequency: "high"  # More gestures
+        library:
+          - "wave"
+          - "emphasize"
+          - "excited"
+          - "point"
+

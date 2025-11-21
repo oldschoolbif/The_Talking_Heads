@@ -1,0 +1,131 @@
+# The Talking Heads - .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Cache and Temporary Files
+.cache/
+*.cache
+*.tmp
+*.temp
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Output Files
+examples/outputs/
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mov
+*.mkv
+
+# Generated Files
+*.pyc
+*.pyo
+*.pyd
+*.coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Model Files (if downloaded locally)
+models/
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pb
+*.onnx
+
+# Large Files
+*.zip
+*.tar.gz
+*.rar
+
+# OS Files
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Documentation builds
+docs/_build/
+site/
+
+# API Keys and Secrets (never commit these!)
+*.key
+*.pem
+secrets/
+.secrets
+
+# Audio/Video Processing Temporary Files
+temp/
+tmp/
+.temp/
+.tmp/
+
+# Scene Assets (if large)
+assets/scenes/*.jpg
+assets/scenes/*.png
+assets/scenes/*.mp4
+!assets/scenes/.gitkeep
+

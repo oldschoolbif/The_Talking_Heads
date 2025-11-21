@@ -1,0 +1,32 @@
+# Welcome to The Talking Heads
+
+ALICE: Hello everyone, and welcome to The Talking Heads! I'm Alice, your host for today.
+
+BOB: And I'm Bob, co-host. Thanks for joining us!
+
+ALICE: Today we're thrilled to have Charlie joining us as our special guest.
+
+CHARLIE: Thanks for having me! I'm so excited to be here.
+
+ALICE: Charlie, tell us a bit about what you do.
+
+CHARLIE: Well, I work in AI research, and I'm passionate about how AI can change the world for the better.
+
+BOB: That's fascinating! What do you think is the most exciting development in AI right now?
+
+CHARLIE: I think the most exciting thing is how AI is becoming more accessible to everyone, not just researchers and big companies.
+
+ALICE: Absolutely! We're seeing AI tools that anyone can use, right from their browser.
+
+BOB: But there are also concerns about AI safety and ethics. What's your take on that?
+
+CHARLIE: Great question! I think we need to be thoughtful and responsible about how we develop and deploy AI.
+
+ALICE: That's a great note to end on. Thanks so much for joining us, Charlie!
+
+CHARLIE: Thanks for having me! It was a pleasure.
+
+BOB: And thank you to our listeners for tuning in to The Talking Heads!
+
+ALICE: We'll see you next time!
+

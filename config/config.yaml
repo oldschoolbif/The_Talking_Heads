@@ -1,0 +1,65 @@
+# The Talking Heads - Main Configuration
+
+# API Keys (override with .env file)
+api:
+  heygen:
+    api_key: ${HEYGEN_API_KEY}
+    base_url: https://api.heygen.com/v1
+  did:
+    api_key: ${DID_API_KEY}
+    base_url: https://api.d-id.com
+  elevenlabs:
+    api_key: ${ELEVENLABS_API_KEY}
+    base_url: https://api.elevenlabs.io/v1
+  azure:
+    speech_key: ${AZURE_SPEECH_KEY}
+    speech_region: ${AZURE_SPEECH_REGION}
+
+# Avatar Settings
+avatar:
+  engine: "heygen"  # Options: "heygen", "did"
+  style: "cartoon"  # Options: "cartoon", "realistic"
+  default_expression: "neutral"
+  default_gesture: null
+  fps: 30
+  resolution:
+    width: 1920
+    height: 1080
+
+# TTS Settings
+tts:
+  engine: "elevenlabs"  # Options: "elevenlabs", "azure", "gtts", "coqui"
+  default_voice: null  # Override per persona
+  rate: 1.0  # Speaking rate multiplier
+  pitch: 1.0  # Pitch multiplier
+
+# Video Settings
+video:
+  resolution:
+    width: 1920
+    height: 1080
+  fps: 30
+  quality: "high"  # Options: "fastest", "fast", "medium", "high"
+  format: "mp4"
+  codec: "h264"
+
+# Layout Settings
+layout:
+  mode: "switching"  # Options: "switching", "side_by_side", "picture_in_picture", "grid"
+  max_avatars_visible: 2  # For picture_in_picture or grid
+  transition:
+    type: "fade"  # Options: "fade", "cut", "smooth"
+    duration: 0.5  # seconds
+
+# Storage
+storage:
+  outputs_dir: examples/outputs
+  cache_dir: .cache
+  temp_dir: .cache/temp
+
+# Persona Configuration File
+personas_config: config/personas.yaml
+
+# Scene Configuration File
+scenes_config: config/scenes.yaml
+

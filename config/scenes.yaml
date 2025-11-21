@@ -1,0 +1,44 @@
+# The Talking Heads - Scene Configurations
+# Define background scenes for your podcasts
+
+scenes:
+  studio:
+    name: "Podcast Studio"
+    description: "Professional recording studio with warm lighting"
+    background_url: "assets/scenes/studio_background.jpg"
+    style: "professional"
+    lighting: "warm"
+    layout_hint: "centered"  # How avatars should be positioned
+  
+  classroom:
+    name: "Classroom"
+    description: "Educational setting with bright lighting"
+    background_url: "assets/scenes/classroom_background.jpg"
+    style: "educational"
+    lighting: "bright"
+    layout_hint: "centered"
+  
+  living_room:
+    name: "Living Room"
+    description: "Casual setting with cozy atmosphere"
+    background_url: "assets/scenes/living_room_background.jpg"
+    style: "casual"
+    lighting: "cozy"
+    layout_hint: "centered"
+  
+  office:
+    name: "Office"
+    description: "Professional office environment"
+    background_url: "assets/scenes/office_background.jpg"
+    style: "professional"
+    lighting: "bright"
+    layout_hint: "centered"
+  
+  outdoors:
+    name: "Outdoors"
+    description: "Natural outdoor setting"
+    background_url: "assets/scenes/outdoors_background.jpg"
+    style: "casual"
+    lighting: "natural"
+    layout_hint: "centered"
+
