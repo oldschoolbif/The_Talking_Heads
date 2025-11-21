@@ -1,0 +1,71 @@
+name: Deterministic Test Suite
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  deterministic-pytest:
+    name: Test Python 3.11
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: "0"
+      TZ: "UTC"
+      LC_ALL: "C"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      HYPOTHESIS_SEED: "1337"
+      TEST_SEED: "1337"
+      PY_ENABLE_GPU_TESTS: "0"
+      PY_PARALLEL: "0"
+      # To run GPU-enabled tests, create a dedicated job with PY_ENABLE_GPU_TESTS=1 and CUDA-capable runners.
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # NOTE: Mutation testing (mutmut) should run in a dedicated workflow due to runtime cost.
+
+      - name: Run tests
+        shell: bash
+        run: |
+          set -e  # Exit on first error
+          set -x  # Show all commands
+          
+          # Show pytest version and Python version for debugging
+          python --version
+          pytest --version
+          echo ""
+          echo "=== Running pytest ==="
+          # Override pytest.ini -q with -v for verbose output
+          # Use --override-ini to ensure verbose output shows
+          # Capture output to file for debugging
+          pytest --override-ini="addopts=-v --tb=short" 2>&1 | tee pytest_output.log
+          EXIT_CODE=${PIPESTATUS[0]}
+          
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo ""
+            echo "=== Pytest failed with exit code $EXIT_CODE ==="
+            echo "=== Last 100 lines of output ==="
+            tail -100 pytest_output.log
+            exit $EXIT_CODE
+          fi
+

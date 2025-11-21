@@ -14,20 +14,18 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     
-    - name: Cache pip packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
     
     - name: Install dependencies
       run: |
@@ -43,7 +41,7 @@ jobs:
     
     - name: Type check with mypy
       run: |
-        pip install mypy
+        pip install mypy types-PyYAML types-requests
         mypy src/ --ignore-missing-imports || true
     
     - name: Test with pytest
@@ -51,7 +49,7 @@ jobs:
         pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing || true
     
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: ./coverage.xml
         flags: unittests

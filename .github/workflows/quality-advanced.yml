@@ -1,0 +1,197 @@
+name: Advanced Quality Checks
+
+on:
+  schedule:
+    # Run weekly on Monday at 3am UTC
+    - cron: '0 3 * * 1'
+  workflow_dispatch:  # Allow manual trigger
+  pull_request:
+    branches: [main, develop]
+
+# Run all jobs in parallel for faster execution
+concurrency:
+  group: quality-checks-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  mutation-testing:
+    name: Mutation Testing
+    if: github.event_name != 'push' && !startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install mutmut pytest
+    
+    - name: Run mutation tests (sample)
+      run: |
+        # Run mutation testing on core modules only (full run takes hours)
+        mutmut run --paths-to-mutate=src/core/script_parser.py --tests-dir=tests/unit || true
+        mutmut run --paths-to-mutate=src/core/persona_engine.py --tests-dir=tests/unit || true
+      continue-on-error: true
+    
+    - name: Generate mutation report
+      if: always()
+      run: |
+        mutmut html || true
+        mutmut show all || true
+    
+    - name: Upload mutation report
+      if: always()
+      uses: actions/upload-artifact@v5
+      with:
+        name: mutation-report
+        path: html/
+        retention-days: 30
+
+  type-checking:
+    name: Type Checking with MyPy
+    if: github.event_name != 'push' && !startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install mypy types-PyYAML types-requests
+    
+    - name: Run MyPy
+      run: |
+        mypy src/ --config-file=pyproject.toml || true
+      continue-on-error: true
+
+  performance-tests:
+    name: Performance Testing
+    if: github.event_name != 'push' && !startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+        pip install -r requirements.txt
+        pip install pytest pytest-benchmark
+    
+    - name: Run performance tests
+      run: |
+        pytest tests/unit -m performance --benchmark-only || echo "No performance tests found"
+      continue-on-error: true
+
+  dependency-audit:
+    name: Security Scan
+    if: github.event_name != 'push'
+    # Security scan should run on all PRs including Dependabot
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    
+    - name: Install pip-audit
+      run: pip install pip-audit
+    
+    - name: Audit dependencies
+      run: |
+        pip-audit --desc || true
+      continue-on-error: true
+    
+    - name: Check for outdated packages
+      run: |
+        pip install -r requirements.txt
+        pip list --outdated
+      continue-on-error: true
+
+  test-coverage-trend:
+    name: Coverage Trend Analysis
+    if: github.event_name != 'push' && !startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        fetch-depth: 0  # Full history for trend analysis
+    
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install core test dependencies FIRST (pytest must be available)
+        pip install "numpy>=1.23,<2.0.0" typer hypothesis sortedcontainers mypy types-PyYAML types-requests
+        pip install pytest pytest-asyncio pytest-cov pytest-xdist pytest-timeout pytest-benchmark
+        # Install requirements - continue even if optional packages fail
+        pip install -r requirements.txt || echo "Some optional packages failed to install (expected)"
+        # Ensure pytest is still available even if requirements.txt had issues
+        pip install pytest pytest-cov || true
+    
+    - name: Generate coverage report
+      run: |
+        pytest --cov=src --cov-report=json --cov-report=term -q || true
+      continue-on-error: true
+    
+    - name: Coverage summary
+      if: always()
+      run: |
+        python3 -c "import json, textwrap; from pathlib import Path; exec(textwrap.dedent('''
+            import json
+            from pathlib import Path
+
+            coverage_path = Path('coverage.json')
+            if not coverage_path.exists():
+                print('⚠️ Coverage report not generated (tests may have failed)')
+            else:
+                print('📊 Coverage Summary:')
+                with coverage_path.open() as f:
+                    data = json.load(f)
+                total = data['totals']['percent_covered']
+                print(f'Total Coverage: {total:.2f}%')
+                print('\\n📈 Module Coverage:')
+                for file, stats in sorted(data['files'].items()):
+                    if 'src/' in file:
+                        name = file.split('src/')[-1]
+                        cov = stats['summary']['percent_covered']
+                        print(f'  {name}: {cov:.1f}%')
+        '''))"
+      continue-on-error: true
+
