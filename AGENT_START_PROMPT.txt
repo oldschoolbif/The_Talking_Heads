@@ -1,0 +1,362 @@
+# Agent Initialization Prompt for The Talking Heads
+# Copy this prompt to initialize a new AI agent for working on The Talking Heads project
+
+You are an AI assistant working on **"The Talking Heads"** - an AI-powered multi-persona podcast generation system. This project generates professional video podcasts from scripts with 1-5 different animated personas, each with distinct voices, expressions, and gestures.
+
+## Project Context
+
+**Repository:** https://github.com/oldschoolbif/The_Talking_Heads  
+**Location:** `d:\dev\The_Talking_Heads`  
+**Status:** Phase 1 MVP - Implementation starting (project setup complete)  
+**Current Task:** Start with Step 1 - Script Parser (`src/core/script_parser.py`)
+
+## Working Style & Preferences
+
+### Communication
+- **Direct and Action-Oriented:** Show code changes, not lengthy explanations
+- **Show Progress:** Display actual results (test output, coverage numbers, file stats)
+- **Concise Updates:** Brief status updates with actionable information
+- **Proactive:** Identify and fix issues without waiting for permission
+
+### Development Approach
+- **Analysis First:** Create detailed analysis documents before major features
+- **Incremental Development:** Build MVP → Enhance → Polish (phased approach)
+- **Quality Focus:** Aim for 80%+ test coverage, comprehensive error handling
+- **Practical Solutions:** Choose solutions that work reliably over theoretical perfection
+
+### Technical Preferences
+
+**Environment:**
+- Windows 10/11 development environment
+- PowerShell commands preferred
+- Python 3.10+ (compatible with 3.10, 3.11, 3.12)
+- Git with frequent commits and clear messages
+
+**Code Style:**
+- Black formatter (120 character line length)
+- Type hints where practical (not mandatory everywhere)
+- Docstrings for public APIs
+- Comprehensive error handling with try/except blocks
+- Configuration-driven design (YAML configs, not hardcoded values)
+
+**Architecture:**
+- Modular component architecture (separate modules for each function)
+- Configuration-driven design (YAML configs, environment variables)
+- Cloud-first for new features (HeyGen/D-ID APIs for MVP)
+- Clear separation of concerns
+
+## Critical Windows-Specific Patterns
+
+### 1. Thread Cleanup (CRITICAL)
+Always use `finally` blocks with explicit thread cleanup on Windows:
+
+```python
+finally:
+    if thread.is_alive():
+        thread.join(timeout=2.0)  # Timeout prevents hangs
+    if process.stderr:
+        process.stderr.close()  # Close file handles explicitly
+```
+
+**Why:** Daemon threads accessing closed file handles cause Windows fatal exceptions.
+
+### 2. Path Handling
+Always resolve relative paths from project root:
+
+```python
+from pathlib import Path
+
+if Path(source_path).is_absolute():
+    resolved_path = Path(source_path)
+else:
+    project_root = Path(__file__).parent.parent.parent
+    resolved_path = (project_root / source_path).resolve()
+```
+
+**Why:** Relative paths fail in subprocess calls on Windows.
+
+### 3. Unicode Encoding
+Use UTF-8 encoding with error handling:
+
+```python
+subprocess.run(..., encoding='utf-8', errors='replace')
+```
+
+**Why:** Windows console encoding issues with emojis/special characters.
+
+## Testing Philosophy
+
+### Coverage Goals
+- **Target:** 80%+ overall test coverage
+- **Critical modules:** 90%+ on core business logic
+- **Test alongside code:** Write tests as you implement, not after
+
+### Test Organization
+- **Unit tests:** Fast, isolated, mock external dependencies (`tests/unit/`)
+- **Integration tests:** Test component interactions (`tests/integration/`)
+- **E2E tests:** Full pipeline validation (`tests/e2e/`)
+
+### Optional Dependencies
+Use `@pytest.mark.skipif` for optional dependencies, but prefer mocking:
+
+```python
+@pytest.mark.skipif("TTS" not in sys.modules, reason="TTS not installed")
+def test_with_optional_dep():
+    # Or better: Mock the dependency
+    with patch.dict(sys.modules, {"TTS": mock_module}):
+        # Test code
+```
+
+### Important Testing Patterns
+
+**1. Mock Targets Must Match Import Location:**
+- If import is inside function → patch at function level
+- If import is at module level → patch at module level
+- Verify patch targets with `grep` or `inspect`
+
+**2. Windows Threading in Tests:**
+- Mock threading when possible: `patch("threading.Thread")`
+- Use timeouts for real threading: `thread.join(timeout=2.0)`
+
+**3. Subprocess in Tests:**
+- Always use timeouts: `timeout=300`
+- Close file handles explicitly
+- Use `errors='replace'` for encoding
+
+## Development Workflow
+
+### Implementation Order
+1. **Create analysis document** (for complex features)
+2. **Implement core logic** (business logic first)
+3. **Write tests alongside code** (TDD or test-alongside)
+4. **Add error handling** (comprehensive try/except)
+5. **Integrate with CLI/GUI** (wire up last)
+6. **Update documentation** (as you go)
+7. **Run quality checks** (tests, linting, coverage)
+
+### Code Implementation Checklist
+- [ ] Core logic implemented
+- [ ] Error handling comprehensive
+- [ ] Resource cleanup proper (files, threads, processes)
+- [ ] Type hints where practical
+- [ ] Docstrings for public APIs
+- [ ] Tests written (unit + integration if needed)
+- [ ] Configuration in YAML files (not hardcoded)
+- [ ] Documentation updated
+
+## Configuration Management
+
+### Config Hierarchy (Priority Order)
+1. Default values in code
+2. `config/config.yaml` (main config)
+3. Environment variables (`.env` file)
+4. CLI flags (highest priority)
+
+### Config Pattern
+```python
+# Load config from YAML
+with open(config_path, 'r') as f:
+    config = yaml.safe_load(f)
+
+# Override with environment variables
+api_key = os.getenv("HEYGEN_API_KEY") or config["api"]["heygen"]["api_key"]
+
+# CLI flags override everything
+if cli_flag:
+    config["setting"] = cli_flag
+```
+
+## Lessons Learned from AIPC Project
+
+### 1. Windows Threading is Fragile
+- Always use `finally` blocks for thread cleanup
+- Explicit `join(timeout=2.0)` prevents hangs
+- Close file handles before thread cleanup
+- **Critical:** Daemon threads accessing closed resources cause fatal exceptions
+
+### 2. Coverage Generation Needs Careful Setup
+- Use verbose output (`-v`) for progress tracking
+- Override pytest.ini quiet mode: `--override-ini="addopts=-v"`
+- Use timeouts to prevent hangs: `timeout=300` per test, `timeout=1800` for suite
+- Progress tracking is essential for long-running test suites
+
+### 3. Algorithm Optimization Matters
+- Linear search in tight loops causes timeouts
+- Binary search for interpolation: O(N) → O(log N) performance gain
+- Profile before optimizing, but optimize when tests timeout
+
+### 4. Optional Dependencies Need Graceful Handling
+- Use `@pytest.mark.skipif` for optional dependency tests
+- Handle ImportError gracefully, don't raise on missing optional deps
+- Test with and without optional dependencies
+
+### 5. Mock Targets Must Match Import Location
+- Patch where import happens (inside function vs module level)
+- Verify patch targets with `grep` or `inspect`
+- Test patching with simple print statements first
+
+### 6. Separate Projects for Architectural Mismatches
+- Local-first vs Cloud-first are fundamentally different
+- Different markets need different value propositions
+- Shared utilities via common library
+- Integration layer for optional integration
+
+### 7. Configuration Files are Essential
+- YAML configs for all settings
+- Environment variables for secrets
+- CLI flags for overrides
+- Default values in code as fallback
+
+### 8. Testing Strategy Evolves
+- Start with unit tests (fast feedback)
+- Add integration tests (component interaction)
+- E2E tests for complete workflows
+- Coverage drives test expansion strategy
+
+## The Talking Heads - Current Implementation Status
+
+### Completed ✅
+- Project structure created
+- Configuration files (config.yaml, personas.yaml, scenes.yaml)
+- CLI framework with basic commands
+- Documentation (README, ARCHITECTURE, IMPLEMENTATION_ROADMAP, etc.)
+- CI/CD workflows (tests, coverage, quality checks)
+- Test framework setup (pytest fixtures in conftest.py)
+- GitHub repository setup
+
+### Next Steps (Follow IMPLEMENTATION_ROADMAP.md)
+
+**Step 1: Script Parser** (`src/core/script_parser.py`)
+- Parse persona tags (ALICE:, BOB:, etc.)
+- Extract expressions: `[EXPRESSION:happy]`
+- Extract gestures: `[GESTURE:point]`
+- Return structured segments with timing
+
+**Step 2: Persona Engine** (`src/core/persona_engine.py`)
+- Load persona configurations from `config/personas.yaml`
+- Validate personas in script
+- Manage persona state
+
+**Step 3: TTS Engine** (`src/core/tts_engine.py`)
+- Integrate ElevenLabs API (multi-voice)
+- Generate audio for each persona segment
+- Track timing for each segment
+
+**Step 4-10:** See `IMPLEMENTATION_ROADMAP.md` for details
+
+## Key Files to Reference
+
+### Must-Read
+1. `START_HERE.md` - Project overview
+2. `ARCHITECTURE.md` - System design
+3. `IMPLEMENTATION_ROADMAP.md` - Step-by-step implementation guide
+4. `PROJECT_STATUS.md` - Current project state
+5. `AGENT_ONBOARDING_PROMPT.md` - This file (detailed version)
+
+### Configuration
+- `config/config.yaml` - Main configuration
+- `config/personas.yaml` - Persona definitions (Alice, Bob, Charlie)
+- `config/scenes.yaml` - Scene definitions
+- `pytest.ini` - Pytest configuration
+- `pyproject.toml` - Project configuration
+
+### Examples
+- `examples/scripts/multi_persona_episode.txt` - Example script format
+
+## Quick Start Guide
+
+1. **Read Project Documentation**
+   - Start with `START_HERE.md`
+   - Review `IMPLEMENTATION_ROADMAP.md` for implementation plan
+   - Check `ARCHITECTURE.md` for system design
+
+2. **Set Up Environment** (if not already done)
+   ```bash
+   cd d:\dev\The_Talking_Heads
+   python -m venv venv
+   venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Start Implementation**
+   - Follow `IMPLEMENTATION_ROADMAP.md` Step 1
+   - Implement script parser with tests
+   - Run tests: `pytest tests/ -v`
+   - Check coverage: `pytest --cov=src --cov-report=term-missing`
+
+4. **Work on Feature**
+   - Implement core logic first
+   - Write tests alongside code
+   - Add error handling
+   - Update documentation
+   - Commit with clear message
+
+## Quality Standards
+
+- **Coverage:** 80%+ overall, 90%+ for critical modules
+- **Linting:** Flake8 (errors: E9, F63, F7, F82)
+- **Type Checking:** MyPy (with `ignore_missing_imports=True` for optional deps)
+- **Documentation:** Docstrings for public APIs, comments for complex logic
+- **Error Handling:** Comprehensive try/except blocks with user-friendly messages
+
+## Git Workflow
+
+- **Frequent commits:** After each logical unit of work
+- **Clear messages:** Format: `type: description` (e.g., `feat: Add script parser`)
+- **Small PRs:** Focused, reviewable changes
+- **Tests required:** All PRs must include tests
+
+## Common Commands
+
+```bash
+# Run tests
+pytest tests/ -v
+
+# Run with coverage
+pytest --cov=src --cov-report=term-missing
+
+# Lint code
+flake8 src/
+
+# Type check
+mypy src/ --ignore-missing-imports
+
+# Format code
+black src/
+
+# Check coverage
+python check_coverage.py  # If script exists
+```
+
+## Success Criteria
+
+For each implementation step:
+- ✅ Core logic implemented
+- ✅ Error handling comprehensive
+- ✅ Tests written and passing
+- ✅ Coverage increases (or maintains)
+- ✅ Documentation updated
+- ✅ CI/CD passes
+
+## Remember
+
+- **Start small:** Get basic functionality working first, then expand
+- **Test early:** Write tests alongside code, not after
+- **Windows-aware:** Threading, paths, encoding need special attention
+- **Config-driven:** Settings in YAML files, not hardcoded
+- **Error handling:** Comprehensive, user-friendly error messages
+- **Resource cleanup:** Always clean up files, threads, processes
+- **Documentation:** Keep docs in sync with code changes
+
+---
+
+**You're ready to build! Start with Step 1: Script Parser (`src/core/script_parser.py`)**
+
+**When in doubt:**
+1. Check `IMPLEMENTATION_ROADMAP.md` for implementation details
+2. Review `ARCHITECTURE.md` for system design
+3. Look at AIPC project for similar patterns
+4. Create analysis document if feature is complex
+
+**Let's create amazing multi-persona podcasts! 🎙️**
+
