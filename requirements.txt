@@ -1,52 +1,39 @@
-# The Talking Heads - Dependencies
-# AI-Generated Multi-Persona Podcast Creator
-
-# Core Framework
-typer[all]>=0.9.0,<0.15.0
-rich>=13.7.0,<14.0.0
-pydantic>=2.5.0,<3.0.0
-pydantic-settings>=2.1.0,<3.0.0
-
-# API Clients
-requests>=2.31.0,<3.0.0
-httpx>=0.25.0,<0.30.0
+# The Talking Heads - Python Dependencies
 
 # Audio Processing
-pydub==0.25.1
-librosa>=0.10.2,<0.11.0
-soundfile==0.12.1
-scipy>=1.11.0,<1.16.0
-numpy>=1.23.0,<3.0.0
+pydub>=0.25.1
+ffmpeg-python>=0.2.0
 
-# Video Processing
-opencv-python>=4.8.0,<5.0.0
-pillow>=10.0.0,<11.0.0
-imageio>=2.31.0,<3.0.0
-imageio-ffmpeg>=0.4.9,<1.0.0
+# TTS Providers (Local GPU)
+coqui-tts>=0.27.0
+bark>=0.1.0
+eng-to-ipa>=0.0.2
 
-# Configuration
-python-dotenv>=1.0.0,<2.0.0
-pyyaml>=6.0.0,<7.0.0
+# Machine Learning
+torch>=2.0.0
+torchaudio>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Image/Video Processing
+Pillow>=10.0.0
+opencv-python>=4.8.0
 
 # Utilities
-tenacity>=8.2.0,<10.0.0
-loguru>=0.7.0,<0.8.0
-tqdm>=4.66.0,<5.0.0
-psutil>=5.9.0,<7.0.0
+pyyaml>=6.0
+requests>=2.31.0
+python-dotenv>=1.0.0
 
-# Optional: TTS Engines (uncomment as needed)
-# elevenlabs>=0.2.27  # ElevenLabs API client
-# azure-cognitiveservices-speech>=1.34.0  # Azure Speech Service
-# gtts>=2.3.0  # Google TTS (free, basic)
+# Web Framework (for webhooks)
+flask>=3.0.0
+flask-cors>=4.0.0
 
-# Optional: Local TTS (uncomment if using local models)
-# TTS>=0.22.0  # Coqui TTS (local, requires GPU)
+# Optional: External API providers (if using cloud services)
+# elevenlabs>=0.2.0  # Uncomment if using ElevenLabs
+# azure-cognitiveservices-speech>=1.32.0  # Uncomment if using Azure Speech
 
-# Development
-pytest>=7.4.0,<8.0.0
-pytest-cov>=4.1.0,<5.0.0
-pytest-asyncio>=0.21.0,<1.0.0
-black>=23.0.0,<25.0.0
-flake8>=6.0.0,<8.0.0
-mypy>=1.5.0,<2.0.0
+# Audio2Face Integration (NVIDIA Omniverse)
+py-audio2face>=0.1.0  # Python client for Audio2Face (from GitHub)
 
+# USD Format Support (for 3DDFA + Audio2Face workflow)
+usd-core>=25.0  # USD Python API for mesh conversion

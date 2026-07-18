@@ -1,0 +1,27 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies (including ffmpeg for audio/video processing)
+RUN apt-get update && apt-get install -y \
+    gcc \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy project root requirements
+COPY requirements.txt /workspace/requirements.txt
+
+# Install Python dependencies from project root
+RUN pip install --no-cache-dir -r /workspace/requirements.txt
+
+# The actual application code will be mounted as a volume
+# We just need the dependencies installed
+
+# Expose port
+EXPOSE 8001
+
+# Set working directory to where server.py will be mounted
+WORKDIR /app
+
+# Run the application (server.py will be mounted)
+CMD ["python", "/app/server.py"]

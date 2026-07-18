@@ -1,0 +1,28 @@
+ALICE: Welcome to this extended test of the podcast generation system. We're going to run through several topics to ensure everything works correctly.
+
+BOB: That's right! This longer script will help us verify that the system can handle more content without issues.
+
+ALICE: First, let's talk about technology and how it's changing our world. The pace of innovation is truly remarkable.
+
+BOB: Absolutely! From artificial intelligence to renewable energy, we're seeing breakthroughs every single day.
+
+ALICE: And communication has improved so much. We can now connect with anyone, anywhere, at any time.
+
+BOB: Which is why podcasting has become such a popular medium for sharing ideas and conversations.
+
+ALICE: Speaking of podcasts, this system we're testing today should handle multiple speakers seamlessly.
+
+BOB: That's the goal! We want to make sure avatars switch properly between speakers and that audio syncs correctly.
+
+ALICE: This extended test will really put the system through its paces. We're covering multiple segments and topics.
+
+BOB: And by the end, we should have a complete, polished podcast episode ready for distribution.
+
+ALICE: Let's keep going and see how the system performs with this longer format.
+
+BOB: Perfect! This should give us great insight into the system's capabilities and any potential issues.
+
+ALICE: Well, I think we've covered enough for this extended test. The system seems to be handling everything well.
+
+BOB: I agree! This longer script should help us identify any edge cases or performance issues.
+

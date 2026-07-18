@@ -1,0 +1,33 @@
+# Comprehensive Test Script - The Talking Heads
+# This script tests all features: expressions, gestures, multiple personas, tone variations
+
+## Episode: API Testing & Validation
+
+ALICE: [EXPRESSION:happy] [GESTURE:wave] Hello everyone! Welcome to our comprehensive API testing episode. I'm Alice, and I'm excited to walk you through our testing process.
+
+BOB: [EXPRESSION:neutral] [GESTURE:emphasize] Thank you, Alice. I'm Bob, and today we'll be demonstrating the full capabilities of our podcast generation system.
+
+ALICE: [EXPRESSION:surprised] [GESTURE:point] That's right! We're testing multiple APIs, including ElevenLabs for text-to-speech, HeyGen and D-ID for avatar generation.
+
+BOB: [EXPRESSION:thinking] [GESTURE:thinking] The system supports various expressions like happy, neutral, surprised, and concerned. Each persona can express different emotions.
+
+ALICE: [EXPRESSION:happy] [GESTURE:wave] And we have gesture support too! Watch for waves, points, and emphasis gestures throughout this episode.
+
+BOB: [EXPRESSION:concerned] [GESTURE:emphasize] We're also testing background scenes, audio mixing, and video composition. This is a comprehensive validation.
+
+ALICE: [EXPRESSION:neutral] [GESTURE:point] The system handles multiple personas seamlessly, switching between speakers with smooth transitions.
+
+BOB: [EXPRESSION:happy] [GESTURE:emphasize] That's correct! Our pipeline orchestrates everything from script parsing to final video output.
+
+ALICE: [EXPRESSION:surprised] [GESTURE:wave] And we're testing with real APIs today - no mocking! This will show us exactly how robust the system is.
+
+BOB: [EXPRESSION:neutral] [GESTURE:thinking] Perfect. Let's see how well everything works together in production.
+
+ALICE: [EXPRESSION:happy] [GESTURE:emphasize] Absolutely! This comprehensive test will help us identify any issues and validate the entire workflow.
+
+BOB: [EXPRESSION:concerned] [GESTURE:point] We're monitoring for errors, timing issues, and quality problems throughout the generation process.
+
+ALICE: [EXPRESSION:happy] [GESTURE:wave] Well, that's our test script! Let's see how the system handles this comprehensive validation.
+
+BOB: [EXPRESSION:neutral] [GESTURE:emphasize] Thank you for watching. This concludes our API testing episode.
+

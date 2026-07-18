@@ -1,0 +1,12 @@
+ALICE: Welcome to this medium-length test. We're using two personas to verify the system works correctly.
+
+BOB: That's right! This test will help us understand how the system handles slightly longer conversations between two speakers.
+
+ALICE: The system should seamlessly switch between speakers and maintain audio synchronization throughout the conversation.
+
+BOB: Perfect! Let's see how well it performs with this moderate amount of content and dialogue.
+
+ALICE: This should be a good test of the system's capabilities with multiple speakers and longer scripts.
+
+BOB: Absolutely! We're looking forward to seeing the results of this test run.
+

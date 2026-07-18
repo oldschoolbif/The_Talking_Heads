@@ -1,0 +1,30 @@
+{
+  "viseme_sil": [
+    "sil"
+  ],
+  "viseme_PP": [
+    "p",
+    "b",
+    "m"
+  ],
+  "viseme_FF": [
+    "f",
+    "v"
+  ],
+  "viseme_AA": [
+    "aa",
+    "ae",
+    "ah"
+  ],
+  "viseme_EE": [
+    "ee",
+    "eh",
+    "ih"
+  ],
+  "viseme_OH": [
+    "oh",
+    "ao",
+    "ow",
+    "ou"
+  ]
+}

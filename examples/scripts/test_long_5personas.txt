@@ -1,0 +1,30 @@
+ALICE: Welcome everyone! This is a longer test with five different personas participating in the conversation.
+
+BOB: That's correct! We have Alice, myself Bob, Charlie, Diana, and Eve all here to test the system.
+
+CHARLIE: Hi there! I'm Charlie, and I'm excited to see how the system handles conversations with multiple speakers.
+
+DIANA: Hello! Diana here. This longer test should really push the system's capabilities with five different personas.
+
+EVE: And I'm Eve! With this many speakers, the system will need to handle rapid speaker switches and maintain clarity.
+
+ALICE: The system should be able to generate avatars for each of us with unique characteristics and expressions.
+
+BOB: That's right! Each persona should have their own distinct avatar that matches their voice and personality.
+
+CHARLIE: The audio synchronization is crucial here - with five speakers, timing becomes even more important.
+
+DIANA: And the video composition will need to smoothly transition between all five avatars during the conversation.
+
+EVE: This comprehensive test will help us verify that the system can handle complex multi-speaker scenarios.
+
+ALICE: Let's see how well the system performs with this challenging test case involving five different personas.
+
+BOB: I'm confident the system will handle it well, but this test will give us definitive proof.
+
+CHARLIE: We're all excited to see the final result of this multi-persona test conversation.
+
+DIANA: The system should seamlessly blend all five of our voices and avatars into one cohesive video.
+
+EVE: Perfect! Let's see how it performs with this longer, more complex multi-persona script.
+

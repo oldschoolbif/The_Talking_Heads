@@ -1,0 +1,5 @@
+# 3DDFA Test - Blonde Avatar
+
+ALICE: Hello! This is a test of 3DDFA avatar generation.
+ALICE: We're using 3DDFA to reconstruct a 3D face from the 2D headshot image.
+ALICE: The system will process the image and create an enhanced version.

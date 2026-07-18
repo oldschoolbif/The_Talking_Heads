@@ -129,3 +129,5 @@ assets/scenes/*.png
 assets/scenes/*.mp4
 !assets/scenes/.gitkeep
 
+
+config/config.yaml

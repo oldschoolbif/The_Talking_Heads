@@ -1,0 +1,8 @@
+# Test Episode - E2E Verification
+
+ALICE: Hello everyone, welcome to The Talking Heads test episode!
+BOB: Thanks for joining us for this end-to-end test.
+ALICE: Today we're testing the complete pipeline.
+BOB: This should verify everything works together.
+ALICE: Great! Let's see if the pipeline generates our podcast correctly.
+

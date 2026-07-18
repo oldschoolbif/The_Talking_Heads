@@ -1,0 +1,400 @@
+{
+  "audio_tools": {
+    "bark_tts": {
+      "available": true,
+      "version": "installed",
+      "location": "Python package",
+      "gpu_accelerated": true,
+      "features": [
+        "text-to-speech",
+        "voice cloning",
+        "music generation",
+        "sound effects",
+        "phoneme generation"
+      ],
+      "provider_class": "src.core.bark_provider.BarkProvider"
+    },
+    "ffmpeg": {
+      "available": true,
+      "version": "8.0-full_build-www.gyan.dev",
+      "features": [
+        "audio format conversion",
+        "audio mixing",
+        "audio concatenation",
+        "noise reduction",
+        "audio filtering",
+        "sample rate conversion",
+        "channel manipulation"
+      ],
+      "cuda_acceleration": true,
+      "whisper_integration": true
+    },
+    "pydub": {
+      "available": true,
+      "version": "installed",
+      "features": [
+        "audio manipulation",
+        "format conversion",
+        "audio mixing",
+        "audio slicing",
+        "volume adjustment"
+      ],
+      "provider_class": "src.core.audio_mixer.AudioMixer"
+    },
+    "noise_reduction": {
+      "available": false,
+      "note": "Can be added via ffmpeg filters or Python libraries (noisereduce, etc.)"
+    },
+    "audio_format_conversion": {
+      "available": true,
+      "tools": ["ffmpeg", "pydub"],
+      "supported_formats": ["wav", "mp3", "flac", "ogg", "aac", "m4a"]
+    }
+  },
+  "alignment_tools": {
+    "gentle": {
+      "available": false,
+      "note": "Not installed - can be added if needed",
+      "installation": "pip install gentle"
+    },
+    "mfa": {
+      "available": false,
+      "note": "Montreal Forced Aligner - not installed",
+      "installation": "conda install -c conda-forge montreal-forced-alignment"
+    },
+    "coqui_align": {
+      "available": false,
+      "note": "Coqui TTS alignment - not installed",
+      "installation": "pip install coqui-tts[align]"
+    },
+    "wav2vec": {
+      "available": false,
+      "note": "Wav2Vec2-based alignment - not installed",
+      "installation": "pip install transformers"
+    },
+    "phoneme_extraction": {
+      "available": true,
+      "tools": ["bark_tts", "eng-to-ipa"],
+      "note": "Bark can generate phonemes, eng-to-ipa for IPA conversion"
+    }
+  },
+  "model_runtimes": {
+    "pytorch": {
+      "available": true,
+      "version": "2.5.1+cu121",
+      "cuda_available": true,
+      "cuda_version": "12.1",
+      "gpu_count": 1,
+      "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "gpu_memory_total_gb": 8,
+      "compute_capability": "8.9",
+      "features": [
+        "GPU acceleration",
+        "CUDA support",
+        "Model loading",
+        "Inference"
+      ]
+    },
+    "onnx_runtime": {
+      "available": false,
+      "version": null,
+      "note": "Not installed - can be added if needed",
+      "installation": "pip install onnxruntime-gpu"
+    },
+    "whisper": {
+      "available": false,
+      "version": null,
+      "note": "Not installed - can be added if needed",
+      "installation": "pip install openai-whisper",
+      "ffmpeg_integration": true
+    },
+    "tts_pipelines": {
+      "available": true,
+      "providers": [
+        "Bark (local GPU)",
+        "VALL-E X (local GPU)",
+        "XTTS-v2 (local GPU)",
+        "Coqui TTS (local GPU)"
+      ],
+      "provider_classes": [
+        "src.core.bark_provider.BarkProvider",
+        "src.core.valle_provider.VALLEProvider",
+        "src.core.xtts_provider.XTTSProvider"
+      ]
+    },
+    "viseme_phoneme_models": {
+      "available": true,
+      "tools": ["bark_tts"],
+      "note": "Bark generates phonemes, can be used for viseme prediction"
+    }
+  },
+  "video_tools": {
+    "ffmpeg": {
+      "available": true,
+      "version": "8.0-full_build-www.gyan.dev",
+      "features": {
+        "concat": true,
+        "mix": true,
+        "overlay": true,
+        "render": true,
+        "cuda_acceleration": true,
+        "hardware_encoding": true,
+        "hardware_decoding": true
+      },
+      "codecs": {
+        "video": ["h264", "h265", "vp9", "av1"],
+        "audio": ["aac", "mp3", "opus", "vorbis"]
+      },
+      "provider_class": "src.core.video_composer.VideoComposer"
+    },
+    "image_sequence_assembly": {
+      "available": true,
+      "tools": ["ffmpeg", "opencv"],
+      "note": "Can assemble image sequences into video"
+    },
+    "color_grading": {
+      "available": true,
+      "tools": ["ffmpeg filters", "opencv"],
+      "note": "Via ffmpeg filters (eq, curves, etc.) or OpenCV"
+    },
+    "upscaling": {
+      "available": false,
+      "note": "Real-ESRGAN not installed - can be added if needed",
+      "installation": "pip install realesrgan",
+      "alternative": "ffmpeg filters (less effective)"
+    }
+  },
+  "image_tools": {
+    "opencv": {
+      "available": true,
+      "version": "4.11.0",
+      "features": [
+        "image processing",
+        "video processing",
+        "face detection",
+        "image manipulation",
+        "color space conversion"
+      ]
+    },
+    "pillow": {
+      "available": true,
+      "version": "10.1.0",
+      "features": [
+        "image loading",
+        "image saving",
+        "image manipulation",
+        "format conversion",
+        "resizing",
+        "cropping"
+      ]
+    }
+  },
+  "file_system": {
+    "wsl2": {
+      "available": true,
+      "distributions": [
+        "Ubuntu-22.04 (Running)",
+        "docker-desktop (Running)"
+      ],
+      "access_method": "wsl command",
+      "note": "Can run Linux commands and scripts"
+    },
+    "bash": {
+      "available": true,
+      "location": "C:\\WINDOWS\\system32\\bash.exe",
+      "note": "Windows Subsystem for Linux bash"
+    },
+    "powershell": {
+      "available": true,
+      "version": "PowerShell 7+",
+      "note": "Native Windows PowerShell available"
+    },
+    "scheduled_tasks": {
+      "available": true,
+      "windows": "Task Scheduler",
+      "linux": "cron (via WSL2)",
+      "note": "Can create scheduled tasks via scripts"
+    },
+    "json_io": {
+      "available": true,
+      "libraries": ["json (built-in)", "pyyaml"],
+      "note": "Full JSON/YAML read/write support"
+    }
+  },
+  "scripting": {
+    "python": {
+      "available": true,
+      "version": "3.12.10",
+      "executable": "C:\\Users\\dpipe\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "environments": {
+        "system": "Python 3.12.10",
+        "virtual_envs": "Can create/manage venv, conda",
+        "note": "Can run Python scripts, install packages"
+      }
+    },
+    "bash": {
+      "available": true,
+      "location": "C:\\WINDOWS\\system32\\bash.exe",
+      "note": "Can run bash scripts via WSL2"
+    },
+    "powershell": {
+      "available": true,
+      "note": "Can run PowerShell scripts (.ps1 files)"
+    }
+  },
+  "repo_structure": {
+    "root": "D:\\dev\\The_Talking_Heads",
+    "has_src": true,
+    "has_scripts": true,
+    "has_config": true,
+    "has_examples": true,
+    "has_tests": true,
+    "has_docs": true,
+    "structure": {
+      "src/core": "Core provider classes and engines",
+      "src/utils": "Utility functions",
+      "scripts": "Automation and test scripts",
+      "config": "YAML configuration files",
+      "examples": "Example scripts and outputs",
+      "docs": "Documentation"
+    }
+  },
+  "environment_variables": {
+    "python_path": "",
+    "cuda_visible_devices": "",
+    "note": "Can read/write environment variables via os.environ"
+  },
+  "known_paths": {
+    "python_executable": "C:\\Users\\dpipe\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "working_directory": "D:\\dev\\The_Talking_Heads",
+    "repo_root": "D:\\dev\\The_Talking_Heads",
+    "config_dir": "D:\\dev\\The_Talking_Heads\\config",
+    "scripts_dir": "D:\\dev\\The_Talking_Heads\\scripts",
+    "examples_dir": "D:\\dev\\The_Talking_Heads\\examples",
+    "outputs_dir": "D:\\dev\\The_Talking_Heads\\examples\\outputs"
+  },
+  "capabilities": {
+    "can_run_python": true,
+    "can_run_bash": true,
+    "can_run_powershell": true,
+    "can_install_python_packages": true,
+    "can_accept_user_files": true,
+    "can_write_files": true,
+    "can_generate_scripts": true,
+    "can_orchestrate_pipelines": true,
+    "can_call_external_apis": true,
+    "can_manage_docker": true,
+    "can_access_gpu": true,
+    "can_process_audio": true,
+    "can_process_video": true,
+    "can_process_images": true,
+    "can_generate_tts": true,
+    "can_generate_avatars": false,
+    "note": "Avatar generation available via providers (HeyGem, DreamTalk, etc.)"
+  },
+  "integrated_providers": {
+    "tts": {
+      "bark": {
+        "available": true,
+        "class": "src.core.bark_provider.BarkProvider",
+        "gpu": true,
+        "local": true
+      },
+      "valle": {
+        "available": true,
+        "class": "src.core.valle_provider.VALLEProvider",
+        "gpu": true,
+        "local": true
+      },
+      "xtts": {
+        "available": true,
+        "class": "src.core.xtts_provider.XTTSProvider",
+        "gpu": true,
+        "local": true
+      }
+    },
+    "avatar": {
+      "heygem": {
+        "available": false,
+        "status": "bug - FFmpeg wrapper issue",
+        "class": "src.core.heygem_provider.HeyGemProvider",
+        "gpu": true,
+        "local": true,
+        "docker": true
+      },
+      "dreamtalk": {
+        "available": false,
+        "status": "shelved - checkpoints required",
+        "class": "src.core.dreamtalk_provider.DreamTalkProvider",
+        "gpu": true,
+        "local": true
+      },
+      "heygen": {
+        "available": true,
+        "class": "src.core.avatar_generator.HeyGenProvider",
+        "gpu": false,
+        "local": false,
+        "cloud": true
+      },
+      "did": {
+        "available": true,
+        "class": "src.core.avatar_generator.DIDProvider",
+        "gpu": false,
+        "local": false,
+        "cloud": true
+      }
+    }
+  },
+  "pipeline_components": {
+    "script_parser": {
+      "available": true,
+      "class": "src.core.script_parser.ScriptParser",
+      "features": ["markdown parsing", "persona assignment", "segment extraction"]
+    },
+    "persona_engine": {
+      "available": true,
+      "class": "src.core.persona_engine.PersonaEngine",
+      "features": ["persona management", "voice assignment", "avatar assignment"]
+    },
+    "tts_engine": {
+      "available": true,
+      "class": "src.core.tts_engine.TTSEngine",
+      "features": ["multi-provider support", "progress callbacks", "audio generation"]
+    },
+    "audio_mixer": {
+      "available": true,
+      "class": "src.core.audio_mixer.AudioMixer",
+      "features": ["audio concatenation", "audio mixing", "format conversion"]
+    },
+    "avatar_generator": {
+      "available": true,
+      "class": "src.core.avatar_generator.AvatarGenerator",
+      "features": ["multi-provider support", "video generation", "progress tracking"]
+    },
+    "video_composer": {
+      "available": true,
+      "class": "src.core.video_composer.VideoComposer",
+      "features": ["multi-avatar layout", "background scenes", "audio sync", "switching layouts"]
+    },
+    "scene_manager": {
+      "available": true,
+      "class": "src.core.scene_manager.SceneManager",
+      "features": ["scene loading", "background management"]
+    },
+    "pipeline": {
+      "available": true,
+      "class": "src.core.pipeline.Pipeline",
+      "features": ["end-to-end generation", "progress tracking", "error handling"]
+    }
+  },
+  "automation_capabilities": {
+    "can_create_scripts": true,
+    "can_modify_configs": true,
+    "can_run_tests": true,
+    "can_generate_documentation": true,
+    "can_manage_dependencies": true,
+    "can_build_pipelines": true,
+    "can_handle_errors": true,
+    "can_track_progress": true
+  }
+}

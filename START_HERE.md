@@ -39,11 +39,20 @@ pip install -r requirements.txt
 
 ### 4. Configure API Keys
 
-```bash
-# Copy example environment file
-cp .env.example .env
+✅ **API keys are already configured!** Your `.env` file contains:
+- HeyGen API Key
+- D-ID API Key
+- ElevenLabs API Key
+- Azure Speech Key and Region
 
-# Edit .env and add your API keys
+If you need to update keys, run:
+```bash
+python scripts/setup_api_keys.py
+```
+
+Or manually edit `.env` file:
+```bash
+# Edit .env and update your API keys
 # - HEYGEN_API_KEY or DID_API_KEY
 # - ELEVENLABS_API_KEY or AZURE_SPEECH_KEY
 ```

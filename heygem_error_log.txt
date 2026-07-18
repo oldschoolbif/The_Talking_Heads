@@ -1,0 +1,30 @@
+  File "av_utils_ffmpeg.py", line 59, in av_utils_ffmpeg.get_audio_duration
+KeyError: 'streams'
+Traceback (most recent call last):
+  File "trans_dh_service.py", line 398, in trans_dh_service.TransDhTask.work
+  File "av_utils_ffmpeg.py", line 66, in av_utils_ffmpeg.get_audio_duration
+Exception: 三次获取音频时长失败
+2025-11-23 12:44:19,663-[service.self_logger]-threading.py[line:870]-ERROR: 3e4000e0-fabd-4acf-bbaa-dbce8f882af4 -> 任务执行失败，异常信息:[三次获取音频时长失败]
+2025-11-23 12:44:19,727-[service.self_logger]-threading.py[line:870]-INFO: 3e4000e0-fabd-4acf-bbaa-dbce8f882af4 -> 耗时:0.238s 
+172.21.0.1 - - [23/Nov/2025 12:44:21] "GET /easy/query?code=3e4000e0-fabd-4acf-bbaa-dbce8f882af4 HTTP/1.1" 200 -
+172.21.0.1 - - [23/Nov/2025 12:46:18] "GET /easy/query?code=test HTTP/1.1" 200 -
+172.21.0.1 - - [23/Nov/2025 12:46:19] "GET /easy/query?code=test HTTP/1.1" 200 -
+2025-11-23 12:46:20,406-[service.self_logger]-threading.py[line:870]-INFO: 672f2757-7747-47ed-a5df-096cc63da562 ->audio_url:temp/audio_9cc91997.wav, video_url:alice.mp4, chaofen:0, pn:1
+172.21.0.1 - - [23/Nov/2025 12:46:20] "POST /easy/submit HTTP/1.1" 200 -
+172.21.0.1 - - [23/Nov/2025 12:46:20] "GET /easy/query?code=672f2757-7747-47ed-a5df-096cc63da562 HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "av_utils_ffmpeg.py", line 59, in av_utils_ffmpeg.get_audio_duration
+KeyError: 'streams'
+Traceback (most recent call last):
+  File "av_utils_ffmpeg.py", line 59, in av_utils_ffmpeg.get_audio_duration
+KeyError: 'streams'
+Traceback (most recent call last):
+  File "av_utils_ffmpeg.py", line 59, in av_utils_ffmpeg.get_audio_duration
+KeyError: 'streams'
+Traceback (most recent call last):
+  File "trans_dh_service.py", line 398, in trans_dh_service.TransDhTask.work
+  File "av_utils_ffmpeg.py", line 66, in av_utils_ffmpeg.get_audio_duration
+Exception: 三次获取音频时长失败
+2025-11-23 12:46:20,646-[service.self_logger]-threading.py[line:870]-ERROR: 672f2757-7747-47ed-a5df-096cc63da562 -> 任务执行失败，异常信息:[三次获取音频时长失败]
+2025-11-23 12:46:20,714-[service.self_logger]-threading.py[line:870]-INFO: 672f2757-7747-47ed-a5df-096cc63da562 -> 耗时:0.252s 
+172.21.0.1 - - [23/Nov/2025 12:46:22] "GET /easy/query?code=672f2757-7747-47ed-a5df-096cc63da562 HTTP/1.1" 200 -

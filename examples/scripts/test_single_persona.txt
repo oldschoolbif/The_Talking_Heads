@@ -1,0 +1,6 @@
+# Simple Single-Persona Test Script
+
+ALICE: Hello! This is a simple test of the podcast generation system.
+ALICE: We're testing with just one persona to keep things simple.
+ALICE: The system should generate audio and avatar movements correctly.
+

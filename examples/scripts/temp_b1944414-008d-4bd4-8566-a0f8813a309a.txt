@@ -1,0 +1,8 @@
+ALICE: Hello! This is a quick test of the podcast generation system.
+
+BOB: Yes, we're verifying that everything works correctly.
+
+ALICE: The system should generate avatars with expressions and gestures.
+
+BOB: Perfect! Let's see how it performs.
+

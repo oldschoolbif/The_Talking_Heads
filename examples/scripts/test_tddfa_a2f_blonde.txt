@@ -1,0 +1,5 @@
+# 3DDFA + Audio2Face Test - Blonde Avatar
+
+ALICE: Hello! This is a test of the 3DDFA and Audio2Face integration.
+ALICE: We're reconstructing a 3D face from a 2D image and animating it with audio.
+ALICE: This should create a realistic talking avatar!
